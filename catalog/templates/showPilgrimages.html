@@ -1,0 +1,47 @@
+{% include 'nav.html' %}
+<body style="background-color:rgb(180, 180, 180);">
+<div class="main">
+{% block content %}
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	            <p class="h4"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	{% endif %}	    
+{% endwith %}
+{% if 'username' in session %}
+<button type="button" class="btn btn-warning" style="margin: 5px 0px 5px 25px;background-color:slateblue;"><a href="{{url_for('addPilgrimageDetails',osname=san.name)}}" style="text-decoration: none;color:red;"><strong>Add New Pilgrimage State</strong></a></button>
+
+{% endif %}
+<div class="row" style="margin: 10px;">
+{% for sbi in vi %}
+
+	<div class="col-sm-4 text-center">
+		<div class="panel panel-primary">
+			<div class="panel-heading" style="background-color:slateblue;">
+				<h4 style="color:red;">{{ sbi.name }}</h4>
+			</div>
+			<div class="panel-body text-center">
+				<table>
+					<tr><th>Pilgrimage State</th><td>:</td><td><h5>{{ sbi.name }}</h5></td></tr>
+					<tr><th>address</th><td>:</td><td><h5>{{ sbi.address }}</h5></td></tr>
+					<tr><th>god</th><td>:</td><td><h5>{{ sbi.god }}</h5></td></tr>
+					<tr><th>area</th><td>:</td><td><h5>{{ sbi.area }}</h5></td></tr>
+				</table>
+			</div>
+			{% if 'username' in session %}
+			<div class="panel-footer">
+					<button type="button" class="btn btn-info"><a href="{{ url_for('editPilgrimageState',g4id=san.id,luename=sbi.name) }}"style="text-decoration: none;color:white;">EDIT</a></button>
+					<button type="button" class="btn btn-danger"><a href="{{ url_for('deletePilgrimageState',g4id=san.id,luename=sbi.name)}}"style="text-decoration: none;color:white;">DELETE</a></button>
+			</div>
+			{% endif %}	
+			
+		</div>
+	</div>
+{% endfor %}
+</div>
+{% endblock content %}
+</div>

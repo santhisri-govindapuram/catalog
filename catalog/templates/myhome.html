@@ -1,0 +1,32 @@
+<html>
+<head>
+	<style>
+	.main{
+		background-image:url("https://i.pinimg.com/originals/1e/7b/6b/1e7b6b11b5b398711c60f2b71cdf9b03.gif");
+	}
+</style>
+</head>
+{% include 'nav.html' %}
+<div class="main">
+{% block content %}
+  <!-- {% for dsa in gvs_sa %}
+    <a href="{{ url_for('showPilgrimages',g4id=dsa.id)}}">{{dsa.name}}</a><br>
+    {% endfor %} -->
+    {% with messages = get_flashed_messages() %}
+	    {% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	            <p class="h4"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	    {% endif %}
+	{% endwith %}
+
+	<div class="text-center">
+		<!-- <h1>Welcome to Pilgrimages</h1> -->
+		<img style="width: 750px; height: 500px; margin: 0; padding: 0; margin-top: 50px" src="http://www.theholidayindia.com/blog/wp-content/uploads/2015/12/golden-temple-india-1280x800-810x506.jpg">
+	</div>
+{% endblock content %}
+</div>
+</html>
